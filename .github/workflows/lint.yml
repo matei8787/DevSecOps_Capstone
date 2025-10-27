@@ -1,0 +1,31 @@
+name: "Linter for syntax and security"
+run-name: "Code is being verified by ${{ github.actor }}"
+on:
+  push:
+    branches:
+      - prod
+      - dev
+
+jobs:
+  lint_syntax:
+    name: "Lint code syntax"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12.3'
+      - run: pip install flake8
+      - run: flake8 --ignore=E501,F401 --exclude=venv .
+  
+  lint_security:
+    name: "Lint for CVEs"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12.3'
+      - run: pip install bandit
+      - run: bandit -r . --exclude ./venv/,./bugtracker/upload/tests/,./bugtracker/test_*.py
+
