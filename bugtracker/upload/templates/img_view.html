@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block body %}
+
+{% if img_url %}
+<img src="{{ img_url }}">
+{% else %}
+<h1>N-am imaginea</h1>
+{% endif %}
+
+{% endblock %}
