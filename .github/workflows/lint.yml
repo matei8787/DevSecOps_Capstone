@@ -1,5 +1,5 @@
 name: "Linter for syntax and security"
-run-name: "Code is being verified by ${{ $github.actor }}"
+run-name: "Code is being verified by ${{ github.actor }}"
 on:
   push:
     branches:
