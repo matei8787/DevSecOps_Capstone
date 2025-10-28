@@ -1,4 +1,4 @@
-name: "Linter for syntax and security"
+name: "Linter"
 run-name: "Code is being verified by ${{ github.actor }}"
 on:
   push:
