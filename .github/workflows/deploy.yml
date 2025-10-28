@@ -1,9 +1,6 @@
 name: "Deployment"
 run-name: "Deploy the app on self hosted machine"
 on:
-  push:
-    branches:
-      - prod
   workflow_run:
     workflows: ["Linter"]
     types:
