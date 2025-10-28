@@ -30,11 +30,9 @@ jobs:
           echo "POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}" >> .env.prod.db
           echo "POSTGRES_DB=${{ secrets.POSTGRES_DB }}" >> .env.prod.db
       - name: Build Docker Images
-        run: docker-compose -f docker-compose.prod.yml build
+        run: docker-compose -f docker-compose.prod.yml up -d --build
       - name: Run Migrations
         run: docker-compose -f docker-compose.prod.yml exec web python manage.py migrate --no-input
       - name: Collect static files
         run: docker-compose -f docker-compose.prod.yml exec web python manage.py collectstatic --no-input
-      - name: Start Containers
-        run: docker-compose -f docker-compose.prod.yml up
       
