@@ -10,6 +10,7 @@ jobs:
   deploy:
     if: ${{ github.event.workflow_run.head_branch == 'prod' }}
     runs-on: self-hosted
+    environment: env.prod
     steps:
       - name: "Copy repo"
         uses: actions/checkout@v5
