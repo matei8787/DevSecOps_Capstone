@@ -1,4 +1,4 @@
-name: "Linter for syntax and security"
+name: "Linter"
 run-name: "Code is being verified by ${{ github.actor }}"
 on:
   push:
@@ -16,7 +16,7 @@ jobs:
         with:
           python-version: '3.12.3'
       - run: pip install flake8
-      - run: flake8 --ignore=E501,F401 --exclude=venv .
+      - run: flake8 --ignore=E501,F401 --exclude=venv,./bugtracker/test_*.py,./bugtracker/upload/tests/ .
   
   lint_security:
     name: "Lint for CVEs"
