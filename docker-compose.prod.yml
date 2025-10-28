@@ -6,7 +6,10 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.prod
-    command: sh -c "PYTHONPATH=./bugtracker DJANGO_SETTINGS_MODULE=bugtracker.settings gunicorn bugtracker.wsgi:application --bind 0.0.0.0:8000"
+    environment:
+      PYTHONPATH: /home/app/web/bugtracker
+      DJANGO_SETTINGS_MODULE: bugtracker.settings
+    command: sh -c "gunicorn bugtracker.wsgi:application --bind 0.0.0.0:8000"
     volumes:
       - static_volume:/home/app/web/bugtracker/staticfiles
       - media_volume:/home/app/web/bugtracker/mediafiles4
