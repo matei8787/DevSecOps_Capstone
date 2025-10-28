@@ -5,7 +5,7 @@ on:
     branches:
       - prod
   workflow_run:
-    workflows: ["Lint"]
+    workflows: ["Linter"]
     types:
       - completed
 
