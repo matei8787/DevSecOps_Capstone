@@ -4,3 +4,4 @@ import pytest
 def prevent_unauthorized_admin(cli):
     # TODO: After I implement login system
     pass
+

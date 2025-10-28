@@ -3,6 +3,7 @@ version: '3.8'
 services:
   web:
     container_name: bugtracker_web
+    working_dir: /home/app/web/bugtracker
     build:
       context: .
       dockerfile: Dockerfile.prod
