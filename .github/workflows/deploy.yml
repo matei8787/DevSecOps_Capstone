@@ -13,10 +13,22 @@ jobs:
     steps:
       - name: "Copy repo"
         uses: actions/checkout@v5
-      - name: set up Python
-        uses: actions/setup-python@v6
-        with:
-          python-version: "3.12.3"
+      - name: "Create .env.prod and .env.prod.db"
+        run: |
+          echo "DEBUG=${{ secrets.DEBUG }}" >> .env.prod
+          echo "SECRET_KEY=${{ secrets.SECRET_KEY }}" >> .env.prod
+          echo "DJANGO_ALLOWED_HOSTS=${{ secrets.DJANGO_ALLOWED_HOSTS }}" >> .env.prod
+          echo "DJANGO_CSRF_TRUSTED=${{ secrets.DJANGO_CSRF_TRUSTED }}" >> .env.prod
+          echo "SQL_ENGINE=${{ secrets.SQL_ENGINE }}" >> .env.prod
+          echo "SQL_DATABASE=${{ secrets.SQL_DATABASE }}" >> .env.prod
+          echo "SQL_USER=${{ secrets.SQL_USER }}" >> .env.prod
+          echo "SQL_PASSWORD=${{ secrets.SQL_PASSWORD }}" >> .env.prod
+          echo "SQL_HOST=${{ secrets.SQL_HOST }}" >> .env.prod
+          echo "SQL_PORT=${{ secrets.SQL_PORT }}" >> .env.prod
+          echo "DATABASE=${{ secrets.DATABASE }}" >> .env.prod
+          echo "POSTGRES_USER=${{ secrets.POSTGRES_USER }}" >> .env.prod.db
+          echo "POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }}" >> .env.prod.db
+          echo "POSTGRES_DB=${{ secrets.POSTGRES_DB }}" >> .env.prod.db
       - name: Build Docker Images
         run: docker-compose -f docker-compose.prod.yml build
       - name: Run Migrations
