@@ -36,7 +36,7 @@ jobs:
       - name: Build Docker Images
         run: docker-compose -f docker-compose.prod.yml up -d --build
       - name: Run Migrations
-        run: docker-compose -f docker-compose.prod.yml exec -T web python manage.py migrate --no-input
+        run: docker-compose -f docker-compose.prod.yml exec -T web python -m django migrate --no-input
       - name: Collect static files
-        run: docker-compose -f docker-compose.prod.yml exec -T web python manage.py collectstatic --no-input
+        run: docker-compose -f docker-compose.prod.yml exec -T web python -m django collectstatic --no-input
       
