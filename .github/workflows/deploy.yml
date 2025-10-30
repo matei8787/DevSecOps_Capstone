@@ -57,4 +57,3 @@ jobs:
         run: docker-compose -f docker-compose.prod.yml exec -T web python manage.py migrate --no-input
       - name: Collect static files
         run: docker-compose -f docker-compose.prod.yml exec -T web python manage.py collectstatic --no-input
-      
