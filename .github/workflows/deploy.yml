@@ -36,22 +36,10 @@ jobs:
         run: docker-compose -f docker-compose.prod.yml down -v || true
       - name: Build Docker Images
         run: docker-compose -f docker-compose.prod.yml up -d --build
-  wait_db:
-    runs-on: self-hosted
-    environment: env.prod
-    needs: build
-    steps:
-      - name: "Copy repo again"
-        uses: actions/checkout@v5
-      - name: "Wait for the db to start"
-        run: |
-          until docker-compose -f docker-compose.prod.yml exec -T web nc -z db 5432; do
-            sleep 1
-          done
   deploy:
     runs-on: self-hosted
     environment: env.prod
-    needs: wait_db
+    needs: build
     steps:
       - name: Run Migrations
         run: docker-compose -f docker-compose.prod.yml exec -T web python manage.py migrate --no-input
